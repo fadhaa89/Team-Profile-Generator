@@ -71,3 +71,14 @@ async function prompt() {
                    }
               ]);
 
+
+              let response2 = ""
+              // if else statement
+
+              if (response.role === "Engineer") {
+                   response2 = await inquirer.prompt([{
+                        type: "input",
+                        name: "x",
+                        message: "What is the employee's github username?",
+                   }, ]);
+
