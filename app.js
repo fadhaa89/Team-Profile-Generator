@@ -117,36 +117,8 @@ function startHtml() {
             <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
         </nav>
         <div class="container">
-            <div class="row"><div class="col-6">
-            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
-            <h5 class="card-header">Layth Jumaah<br /><br /><i class="fas fa-coffee"></i>Manager</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: 01</li>
-                <li class="list-group-item">Email Address: laythbasil@gmail.com</li>
-                <li class="list-group-item">Office Phone: 111-222-3333</li>
-            </ul>
-            </div>
-        </div><div class="col-6">
-            
-            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
-            <h5 class="card-header">Fadhaa Abdullah<br /><br /><i class="fas fa-user-graduate"></i>Intern</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: 02</li>
-                <li class="list-group-item">Email Address: fadhaaabdullag@gmail.com</li>
-                <li class="list-group-item">School: Berkelybootcamp</li>
-            </ul>
-            </div>
-        </div><div class="col-6">
-            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
-            <h5 class="card-header">LeyaLareen<br /><br /><i class="fas fa-glasses"></i>Engineer</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: 03</li>
-                <li class="list-group-item">Email Address: leyalareen@gmail.com</li>
-                <li class="list-group-item">GitHub: leyalareen</li>
-            </ul>
-            </div>
-        </div> </div>
-    </div>
+            <div class="row" id="main"></div>
+        </div>
     
 </body>
 </html>`;
