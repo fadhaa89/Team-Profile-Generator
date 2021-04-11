@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Engineer = require("./lib/Engineer");
+const Engineer = require("./lib/engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
@@ -79,3 +79,159 @@ function addMember() {
     });
 }
 
+
+function startHtml() {
+    const html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/c502137733.js"></script>
+        <title>Team Profile</title>
+    </head>
+    <body>
+        <style>
+            
+.card {
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: 3px 3px 3px 3px gray;
+}
+
+.card-title {
+    color: white;
+}
+
+@media only screen and (max-width: 812px) {
+
+    .card {
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+}
+        </style>
+        <nav class="navbar navbar-dark bg-dark mb-5">
+            <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
+        </nav>
+        <div class="container">
+            <div class="row"><div class="col-6">
+            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+            <h5 class="card-header">Layth Jumaah<br /><br /><i class="fas fa-coffee"></i>Manager</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: 01</li>
+                <li class="list-group-item">Email Address: laythbasil@gmail.com</li>
+                <li class="list-group-item">Office Phone: 111-222-3333</li>
+            </ul>
+            </div>
+        </div><div class="col-6">
+            
+            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+            <h5 class="card-header">Fadhaa Abdullah<br /><br /><i class="fas fa-user-graduate"></i>Intern</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: 02</li>
+                <li class="list-group-item">Email Address: fadhaaabdullag@gmail.com</li>
+                <li class="list-group-item">School: Berkelybootcamp</li>
+            </ul>
+            </div>
+        </div><div class="col-6">
+            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+            <h5 class="card-header">LeyaLareen<br /><br /><i class="fas fa-glasses"></i>Engineer</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: 03</li>
+                <li class="list-group-item">Email Address: leyalareen@gmail.com</li>
+                <li class="list-group-item">GitHub: leyalareen</li>
+            </ul>
+            </div>
+        </div> </div>
+    </div>
+    
+</body>
+</html>`;
+    fs.writeFile("./output/team.html", html, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    console.log("start");
+}
+
+function addHtml(member) {
+    return new Promise(function(resolve, reject) {
+        const name = member.getName();
+        const role = member.getRole();
+        const id = member.getId();
+        const email = member.getEmail();
+        let data = "";
+        if (role === "Engineer") {
+            const gitHub = member.getGithub();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Engineer</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">GitHub: ${gitHub}</li>
+            </ul>
+            </div>
+        </div>`;
+        } else if (role === "Intern") {
+            const school = member.getSchool();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Intern</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">School: ${school}</li>
+            </ul>
+            </div>
+        </div>`;
+        } else {
+            const officePhone = member.getOfficeNumber();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Manager</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">Office Phone: ${officePhone}</li>
+            </ul>
+            </div>
+        </div>`
+        }
+        console.log("adding team member");
+        fs.appendFile("./output/team.html", data, function (err) {
+            if (err) {
+                return reject(err);
+            };
+            return resolve();
+        });
+    });
+    
+            
+    
+        
+    
+    
+}
+
+function finishHtml() {
+    const html = ` </div>
+    </div>
+    
+</body>
+</html>`;
+
+    fs.appendFile("./output/team.html", html, function (err) {
+        if (err) {
+            console.log(err);
+        };
+    });
+    console.log("end");
+}
+
+
+initApp();
