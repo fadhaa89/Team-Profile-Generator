@@ -12,73 +12,65 @@ function initApp() {
     addMember();
 }
 
+const questions = [{
+    message: "Enter team member's name",
+    name: "name"
+},
+{
+    type: "list",
+    message: "Select team member's role",
+    choices: [
+        "Engineer",
+        "Intern",
+        "Manager"
+    ],
+    name: "role"
+},
+{
+    message: "Enter team member's id",
+    name: "id"
+},
+{
+    message: "Enter team member's email address",
+    name: "email"
+}]
+
 function addMember() {
-    inquirer.prompt([{
-        message: "Enter team member's name",
-        name: "name"
-    },
-    {
-        type: "list",
-        message: "Select team member's role",
-        choices: [
-            "Engineer",
-            "Intern",
-            "Manager"
-        ],
-        name: "role"
-    },
-    {
-        message: "Enter team member's id",
-        name: "id"
-    },
-    {
-        message: "Enter team member's email address",
-        name: "email"
-    }])
-    .then(function({name, role, id, email}) {
-        let roleInfo = "";
-        if (role === "Engineer") {
-            roleInfo = "GitHub username";
-        } else if (role === "Intern") {
-            roleInfo = "school name";
+    let newMember = {};
+    console.log("Running addMember function.");
+
+    return inquirer.prompt(questions).then(function (answers) {
+        newMember = answers;
+
+    // inquirer.prompt(questions)
+    // .then(function ({ roleInfo, moreMembers }) {
+
+        console.log("New Member:", newMember);
+        if (newMember.role === "Engineer") {
+          newMember = new Engineer(newMember.name, newMember.id, newMember.email, newMember.gitHub);
+        } else if (newMember.role === "Intern") {
+          newMember = new Intern(newMember.name, newMember.id, newMember.email, newMember.school);
         } else {
-            roleInfo = "office phone number";
+          newMember = new Manager(newMember.name, newMember.id, newMember.email, newMember.officePhone)
         }
-        inquirer.prompt([{
-            message: `Enter team member's ${roleInfo}`,
-            name: "roleInfo"
-        },
-        {
-            type: "list",
-            message: "Would you like to add more team members?",
-            choices: [
-                "yes",
-                "no"
-            ],
-            name: "moreMembers"
-        }])
-        .then(function({roleInfo, moreMembers}) {
-            let newMember;
-            if (role === "Engineer") {
-                newMember = new Engineer(name, id, email, roleInfo);
-            } else if (role === "Intern") {
-                newMember = new Intern(name, id, email, roleInfo);
-            } else {
-                newMember = new Manager(name, id, email, roleInfo);
-            }
-            employees.push(newMember);
-            addHtml(newMember)
-            .then(function() {
-                if (moreMembers === "yes") {
-                    addMember();
-                } else {
-                    finishHtml();
-                }
-            });
-            
-        });
-    });
+        employees.push(newMember);
+        if (newMember.moreMembers === "yes") {
+          addMember();
+        } else {
+          finishHtml();
+        }
+      });
 }
+
+
+function getEmployeeInfo() {
+    console.log("running getEmployeeInfo function");
+    return inquirer.prompt(questions).then(function (answers) {
+        newMember = answers;
+        console.log("newMember: ", newMember);
+    })
+}
+
 function startHtml() {
     const html = `<!DOCTYPE html>
     <html lang="en">
@@ -157,7 +149,7 @@ function finishHtml() {
             console.log(err);
         };
     });
-    console.log("end");
+    console.log("finishHTML Complete!");
 }
 
 
