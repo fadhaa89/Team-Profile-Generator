@@ -42,9 +42,6 @@ function addMember() {
     return inquirer.prompt(questions).then(function (answers) {
         newMember = answers;
 
-    // inquirer.prompt(questions)
-    // .then(function ({ roleInfo, moreMembers }) {
-
         console.log("New Member:", newMember);
         if (newMember.role === "Engineer") {
           newMember = new Engineer(newMember.name, newMember.id, newMember.email, newMember.gitHub);
@@ -54,21 +51,20 @@ function addMember() {
           newMember = new Manager(newMember.name, newMember.id, newMember.email, newMember.officePhone)
         }
         employees.push(newMember);
+        let oneCard = employees[0].name;
+
+        fs.appendFile("./output/team.html", oneCard, function (err) {
+            if (err) {
+                console.log(err);
+            };
+        });
+
         if (newMember.moreMembers === "yes") {
           addMember();
         } else {
           finishHtml();
         }
       });
-}
-
-
-function getEmployeeInfo() {
-    console.log("running getEmployeeInfo function");
-    return inquirer.prompt(questions).then(function (answers) {
-        newMember = answers;
-        console.log("newMember: ", newMember);
-    })
 }
 
 function startHtml() {
