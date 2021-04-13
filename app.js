@@ -37,14 +37,23 @@ const questions = [{
 
 },
 {
-    message: "Enter Your GitHub Name " ,
-    name: "github"
+    message: "Enter the office phone number",
+    name: "phone"
+},
+{
+    message: "Enter the School name",
+    name: "school"
 },
 {
     message: "do you want to add more Employees ?",
     name:"moreMembers",
     type: "confirm"
 }]
+
+const githubQuestion = {
+    message: "Enter Your GitHub Name " ,
+    name: "github"
+}
 
 function addMember() {
     let newMember = {};
@@ -54,15 +63,17 @@ function addMember() {
         newMember = answers;
         let moreMembers = answers.moreMembers;
 
-        console.log("New Member:", newMember);
-        if (newMember.role === "Engineer") {
-          newMember = new Engineer(newMember.name, newMember.id, newMember.email, newMember.gitHub);
-        } else if (newMember.role === "Intern") {
+        if (answers.role === "Engineer") {
+            let github = inquirer.prompt(githubQuestion);
+          newMember = new Engineer(newMember.name, newMember.id, newMember.email, github);
+        } else if (answers.role === "Intern") {
           newMember = new Intern(newMember.name, newMember.id, newMember.email, newMember.school);
         } else {
           newMember = new Manager(newMember.name, newMember.id, newMember.email, newMember.officePhone)
         }
+        console.log("New Member:", newMember);
         employees.push(newMember);
+        console.log(employees);
 
         for (i = 0; i < employees.length; i++) {
             let oneCard;
@@ -99,7 +110,14 @@ function addMember() {
       });
 }
 
+function clearHTML () {
+    fs.writeFile("./output/team.html", '', function () {
+        console.log("Cleared team.html")
+    });
+} 
+
 function startHtml() {
+
     const html = `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -137,9 +155,10 @@ function startHtml() {
         </nav>
         <div class="container">
             <div class="row" id="main">`;
-    fs.writeFile("./output/team.html", html, function (err) {
+            fs.writeFile("./output/team.html", html, function (err) {
         if (err) {
-            console.log(err); Name();
+            console.log(err); 
+            Name();
             const role = member.getRole();
             const id = member.getId();
             const email = member.getEmail();
