@@ -59,7 +59,9 @@ function addMember() {
     let newMember = {};
     console.log("Running addMember function.");
 
-
+    return inquirer.prompt(questions).then(function (answers) {
+        newMember = answers;
+        let moreMembers = answers.moreMembers;
 
         if (answers.role === "Engineer") {
             let github = inquirer.prompt(githubQuestion);
