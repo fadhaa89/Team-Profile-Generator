@@ -65,7 +65,7 @@ function addMember() {
 
         if (answers.role === "Engineer") {
             let github = inquirer.prompt(githubQuestion);
-          newMember = new Engineer(newMember.name, newMember.id, newMember.email, github);
+          newMember = new Engineer(newMember.name, newMember.id, newMember.email, newMember.github);
         } else if (answers.role === "Intern") {
           newMember = new Intern(newMember.name, newMember.id, newMember.email, newMember.school);
         } else {
