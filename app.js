@@ -50,7 +50,10 @@ const questions = [{
     type: "confirm"
 }]
 
-
+const githubQuestion = {
+    message: "Enter Your GitHub Name " ,
+    name: "github"
+}
 
 function addMember() {
     let newMember = {};
