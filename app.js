@@ -51,7 +51,9 @@ function addMember() {
           newMember = new Manager(newMember.name, newMember.id, newMember.email, newMember.officePhone)
         }
         employees.push(newMember);
-        let oneCard = employees[0].name;
+
+        // let oneCard = `<h1>${employees[0].name}</h1>`;
+        let oneCard = managerCard(employees[0]);
 
         fs.appendFile("./output/team.html", oneCard, function (err) {
             if (err) {
