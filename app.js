@@ -4,7 +4,8 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const managerCard = require("./templates/managerCard");
-
+const internCard = require("./templates/internCard");
+const engineerCard = require("./templates/engineerCard");
 const employees = [];
 
 function initApp() {
@@ -33,6 +34,16 @@ const questions = [{
 {
     message: "Enter team member's email address",
     name: "email"
+
+},
+{
+    message: "Enter Your GitHub Name " ,
+    name: "github"
+},
+{
+    message: "do you want to add more Employees ?",
+    name:"moreMembers",
+    type: "confirm"
 }]
 
 function addMember() {
@@ -41,6 +52,7 @@ function addMember() {
 
     return inquirer.prompt(questions).then(function (answers) {
         newMember = answers;
+        let moreMembers = answers.moreMembers;
 
         console.log("New Member:", newMember);
         if (newMember.role === "Engineer") {
@@ -52,16 +64,34 @@ function addMember() {
         }
         employees.push(newMember);
 
-        // let oneCard = `<h1>${employees[0].name}</h1>`;
-        let oneCard = managerCard(employees[0]);
+        for (i = 0; i < employees.length; i++) {
+            let oneCard;
+            if (employees[i].title === "Engineer") {
+                oneCard = engineerCard(employees[i]);
+                fs.appendFile("./output/team.html", oneCard, function (err) {
+                    if (err) {
+                        console.log(err);
+                    };
+                });
+            } else if (employees[i].title === "Intern") {
+                oneCard = internCard(employees[i]);
+                fs.appendFile("./output/team.html", oneCard, function (err) {
+                    if (err) {
+                        console.log(err);
+                    };
+                });
+                
+            } else {
+                oneCard = managerCard(employees[i]);
+                fs.appendFile("./output/team.html", oneCard, function (err) {
+                    if (err) {
+                        console.log(err);
+                    };
+                });
+            }
+        }
 
-        fs.appendFile("./output/team.html", oneCard, function (err) {
-            if (err) {
-                console.log(err);
-            };
-        });
-
-        if (newMember.moreMembers === "yes") {
+        if (moreMembers === true) {
           addMember();
         } else {
           finishHtml();
