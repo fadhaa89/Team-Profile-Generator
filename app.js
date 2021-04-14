@@ -43,11 +43,11 @@ const questions = [
     name: "moreMembers",
     type: "confirm",
   },
+  {
+    message: "Enter Your GitHub Name ",
+    name: "github",
+  },
 ];
-const githubQuestion = {
-  message: "Enter Your GitHub Name ",
-  name: "github",
-};
 function addMember() {
   let newMember = {};
   console.log("Running addMember function.");
@@ -55,7 +55,7 @@ function addMember() {
     newMember = answers;
     let moreMembers = answers.moreMembers;
     if (answers.role === "Engineer") {
-      let github = inquirer.prompt(githubQuestion);
+    //   let github = inquirer.prompt(githubQuestion);
       newMember = new Engineer(
         newMember.name,
         newMember.id,
@@ -74,7 +74,7 @@ function addMember() {
         newMember.name,
         newMember.id,
         newMember.email,
-        newMember.officePhone
+        
       );
     }
     console.log("New Member:", newMember);
