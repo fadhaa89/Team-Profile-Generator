@@ -6,7 +6,7 @@ function engineerCard (member) {
     <h5 class="card-header"><span id="name">${member.name}</span><br /><br />Engineer</h5>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: <span id="empID">${member.id}</span></li>
-        <li class="list-group-item">Email Address:<span id="email">${member.email}</span> </li>
+        <li class="list-group-item">Email Address:<span id="email"><a href="mailto:${member.email}">${member.email}</a></span> </li>
         <li class="list-group-item">GitHub: <span id="github">${member.github}</span></li>
     </ul>
  </div>`
