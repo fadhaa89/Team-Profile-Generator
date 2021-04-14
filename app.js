@@ -39,13 +39,13 @@ const questions = [
     name: "school",
   },
   {
+    message: "Enter Your GitHub Name ",
+    name: "github",
+  },
+  {
     message: "do you want to add more Employees ?",
     name: "moreMembers",
     type: "confirm",
-  },
-  {
-    message: "Enter Your GitHub Name ",
-    name: "github",
   },
 ];
 function addMember() {
@@ -70,13 +70,13 @@ function addMember() {
         newMember.school
       );
     } else {
-      newMember = new Manager(
-        newMember.name,
-        newMember.id,
-        newMember.email,
-        
-      );
-    }
+        newMember = new Manager(
+          newMember.name,
+          newMember.id,
+          newMember.email,
+          newMember.phone
+        );
+      }
     console.log("New Member:", newMember);
     employees.push(newMember);
     console.log(employees);
