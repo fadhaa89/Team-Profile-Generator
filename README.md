@@ -1,4 +1,8 @@
-## Team-Profile-Generator
+## walkthrough video
+C:\Users\fadha\Desktop\homework\Team-Profile-Generator\assets\image\example.gif
+
+## Tittle 
+Team-Profile-Generator
 
 ## Description
 a Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person.when you generate a webpage that displays the  team's basic info that's have quick access to their emails and GitHub profiles.
