@@ -136,13 +136,10 @@ function startHtml() {
     margin-top: 20px;
     box-shadow: 3px 3px 3px 3px gray;
 }
-
 .card-title {
     color: white;
 }
-
 @media only screen and (max-width: 812px) {
-
     .card {
         margin-top: 15px;
         width: 100%;
